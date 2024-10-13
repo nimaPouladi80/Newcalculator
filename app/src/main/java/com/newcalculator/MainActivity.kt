@@ -1,6 +1,9 @@
-package com.newcalculator
+package com.findingtheproblem
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import com.newcalculator.R
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,38 +14,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.newcalculator.ui.theme.NewcalculatorTheme
+
+
 import androidx.appcompat.widget.AppCompatButton
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+ class MainActivity : ComponentActivity() {
+     private val input= mutableListOf<String>()
+     private val display=findViewById<TextView>(R.id.display)
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            NewcalculatorTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        setContentView(R.layout.layout)
     }
-}
+     fun onClick(button:View){
+         input.add((button as AppCompatButton).text.toString())
+         display.text="${display.text} ${button.text} "
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+     }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NewcalculatorTheme {
-        Greeting("Android")
-    }
+
+
 }
